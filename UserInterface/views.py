@@ -1,11 +1,10 @@
-
 # Create your views here.
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from django.shortcuts import render
-from .forms import YAML_config_file_form
+from django.shortcuts import render, redirect
+from .forms import YAML_config_file_form, SelectContainerForm
 from .models import ConfigurationFile
-from .kube_model import Resource, Status, Service
+from .kube_model import Resource, Status, Service, Console
 
 
 def start(request):
@@ -18,8 +17,20 @@ def start(request):
 def dashboard(request):
     """Dashboard page.
     """
+    daemon_set = Resource.Daemon_set()
+    daemon_set_list = daemon_set.List_Daemon_set_For_All_Namespaces()
+
+    deployment = Resource.Deployment()
+    deployment_list = deployment.List_Deployment_For_All_Namespaces()
+
+    pod = Status.Pod_status()
+    pod_list = pod.All_Namespaces_Pod()
     return render(request, "UserInterface/sb_admin_dashboard.html",
-                  {"nav_active": "dashboard"})
+                  context={
+                      "pod": len(pod_list),
+                      "daemon_set": len(daemon_set_list),
+                      "deployment": len(deployment_list),
+                      "nav_active": "dashboard"})
 
 
 def charts(request):
@@ -41,14 +52,42 @@ def tables(request):
     pod = Status.Pod_status()
     pod_list = pod.All_Namespaces_Pod()
 
-    context = {
-        "deamon_set_list": daemon_set_list,
-        "deployment_list": deployment_list,
-        "pod_list": pod_list,
-        "nav_active": "tables"
-    }
     return render(request, "UserInterface/sb_admin_tables.html",
-                  context)
+                  context={
+                      "deamon_set_list": daemon_set_list,
+                      "deployment_list": deployment_list,
+                      "pod_list": pod_list,
+                      "nav_active": "tables",
+                  })
+
+
+def Consoles(request):
+    if request.method == "POST":
+        pod = Status.Pod_status()
+        pod_list = pod.All_Namespaces_Pod()
+        name = request.POST['item']
+        # for pod in pod_list:
+        #      if name == pod.metadata.name:
+
+        pod = Status.Pod_status()
+        pod_list = pod.All_Namespaces_Pod()
+        return render(request, "UserInterface/sb_admin_consoles.html",
+                      context={
+                          "pod_list": pod_list,
+                      })
+
+    else:
+        pod = Status.Pod_status()
+        pod_list = pod.All_Namespaces_Pod()
+        return render(request, "UserInterface/sb_admin_consoles.html",
+                      context={
+                          "pod_list": pod_list,
+                      })
+
+
+def terminal(request, item):
+    Text = item.metadata.name
+    return HttpResponse(Text)
 
 
 def forms(request):

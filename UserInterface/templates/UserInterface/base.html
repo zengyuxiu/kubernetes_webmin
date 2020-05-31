@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{% block sb_admin_description %}{% endblock sb_admin_description %}">
     <meta name="author" content="{% block sb_admin_author %}{% endblock %}">
-    <title>{% block title %}Django SB Admin -Bootstrap Admin Template{% endblock %}</title>
+    <title>{% block title %}HGCM{% endblock %}</title>
 
     <!-- Bootstrap Core CSS -->
     {% block sb_admin_bootstrap_css %}<link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet">{% endblock sb_admin_bootstrap_css %}
@@ -41,10 +41,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{% block sb_admin_header_url %}{% url "sb_admin_start" %}{% endblock sb_admin_header_url %}">{% block sb_admin_header %}Django SB Admin{% endblock sb_admin_header %}</a>
+                <a class="navbar-brand" href="{% block sb_admin_header_url %}{% url "sb_admin_start" %}{% endblock sb_admin_header_url %}">{% block sb_admin_header %}Home{% endblock sb_admin_header %}</a>
             </div>
             <!-- Top Menu Items -->
-            {% block sb_admin_navbar_right %}<ul class="nav navbar-right top-nav">
+            {% comment %}{% block sb_admin_navbar_right %}<ul class="nav navbar-right top-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
@@ -146,13 +146,13 @@
                         </li>
                     </ul>
                 </li>
-            </ul>{% endblock sb_admin_navbar_right %}
+            </ul>{% endblock sb_admin_navbar_right %}{% endcomment %}
             {% block sb_admin_sidebar %}<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li {% if nav_active == "start" %}class="active"{% endif %}>
+ {% comment %}                   <li {% if nav_active == "start" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_start" %}"><i class="fa fa-fw fa-play"></i> Start</a>
-                    </li>
+                    </li>{% endcomment %}
                     <li {% if nav_active == "dashboard" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_dashboard" %}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
@@ -165,29 +165,33 @@
                     <li {% if nav_active == "forms" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_forms" %}"><i class="fa fa-fw fa-edit"></i> Forms</a>
                     </li>
-                    <li {% if nav_active == "bootstrap_elements" %}class="active"{% endif %}>
+{% comment %}                    <li {% if nav_active == "bootstrap_elements" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_bootstrap_elements" %}"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                     </li>
                     <li {% if nav_active == "bootstrap_grid" %}class="active"{% endif %}>
-                        <a href="{% url "sb_admin_bootstrap_grid" %}""><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                    </li>
+                        <a href="{% url "sb_admin_bootstrap_grid" %}"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                    </li>{% endcomment %}
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Charts <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="#">Pod</a>
                             </li>
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="#">Daemon set</a>
+                            <li>
+                                <a href="#">Deployment</a>
                             </li>
                         </ul>
                     </li>
 
+{% comment %}
                     <li {% if nav_active == "rtl_dashboard" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_rtl_dashboard" %}"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                     </li>
-                    <li {% if nav_active == "blank" %}class="active"{% endif %}>
-                        <a href="{% url "sb_admin_blank" %}"><i class="fa fa-fw fa-file"></i> Blank</a>
+{% endcomment %}
+               <li {% if nav_active == "blank" %}class="active"{% endif %}>
+                        <a href="{% url "sb_admin_blank" %}"><i class="fa fa-fw fa-file"></i> Console</a>
                     </li>
 
                 </ul>

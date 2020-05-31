@@ -5,9 +5,9 @@ from pprint import pprint
 
 
 class Pod_status():
-    config_path = "~/.kube/kind-config-kind"
+    config_path = "~/.kube/config"
 
-    def __init__(self, config_path="~/.kube/kind-config-kind"):
+    def __init__(self, config_path="~/.kube/config"):
         self.config_path = config_path
         config.load_kube_config(self.config_path)
 

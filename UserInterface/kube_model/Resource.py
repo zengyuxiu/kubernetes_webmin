@@ -5,9 +5,9 @@ from pprint import pprint
 
 
 class Deployment():
-    config_path = "~/.kube/kind-config-kind"
+    config_path = "~/.kube/config"
 
-    def __init__(self, config_path="~/.kube/kind-config-kind"):
+    def __init__(self, config_path="~/.kube/config"):
         self.config_path = config_path
         config.load_kube_config(self.config_path)
 
@@ -21,7 +21,7 @@ class Deployment():
         pretty = 'true'  # str | If 'true', then the output is pretty printed. (optional)
         # resource_version = 'resource_version_example'  # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
         timeout_seconds = 56  # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-        watch = False # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+        watch = False  # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
         api_response = api_instance.list_deployment_for_all_namespaces(pretty=pretty, watch=watch)
 
@@ -29,9 +29,9 @@ class Deployment():
 
 
 class Daemon_set():
-    config_path = "~/.kube/kind-config-kind"
+    config_path = "~/.kube/config"
 
-    def __init__(self, config_path="~/.kube/kind-config-kind"):
+    def __init__(self, config_path="~/.kube/config"):
         self.config_path = config_path
         config.load_kube_config(self.config_path)
 
@@ -42,7 +42,7 @@ class Daemon_set():
 
         pretty = 'true'  # str | If 'true', then the output is pretty printed. (optional)
 
-        watch = False # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+        watch = False  # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
         api_response = api_instance.list_daemon_set_for_all_namespaces(pretty=pretty, watch=watch)
         return api_response.items

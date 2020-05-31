@@ -1,7 +1,49 @@
-{% extends "UserInterface/base.html" %}{% load static %}{% block sb_admin_title %}Blank page{% endblock sb_admin_title %}
-{% block sb_admin_subheading %}<small>Subheading</small>{% endblock sb_admin_subheading %}
+{% extends "UserInterface/base.html" %}{% load static %}{% block sb_admin_title %}Console{% endblock sb_admin_title %}
+{% block xterm %}
+    <link href="{% static "node_modules/xterm/css/xterm.css" %}">
+   {% comment %} <link href="{% static "node_modules/xterm/addons/fullscreen/fullscreen.css" %}">{% endcomment %}
+{% endblock xterm %}
+{% block sb_admin_subheading %}<small>Console</small>{% endblock sb_admin_subheading %}
 {% block sb_admin_breadcrumb %}<i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>{% endblock sb_admin_breadcrumb %}
 {% block sb_admin_breadcrumb_active %}<li class="active">
-      <i class="fa fa-file""></i> Blank page
+      <i class="fa fa-file"></i> Console
  </li>{% endblock sb_admin_breadcrumb_active %}
-{% block sb_admin_content %}{% endblock sb_admin_content %}
+{% block sb_admin_content %}
+
+  <div id="terminal"></div>
+
+<script src="{% static "node_modules/xterm/lib/xterm.js" %}"></script>
+{% comment %}<script src="/static/plugins/xterm/addons/fullscreen/fullscreen.js"></script>{% endcomment %}
+<script>
+  var term = new Terminal({cursorBlink: true});
+  term.open(document.getElementById('terminal'));
+
+  // xterm fullscreen config
+{% comment %}
+  Terminal.applyAddon(fullscreen);
+  term.toggleFullScreen(true);
+{% endcomment %}
+
+  var socket = new WebSocket(
+    'ws://' + window.location.host + '/pod/{{ name }}');
+
+  socket.onopen = function () {
+    term.on('data', function (data) {
+        socket.send(data);
+    });
+
+    socket.onerror = function (event) {
+      console.log('error:' + e);
+    };
+
+    socket.onmessage = function (event) {
+      term.write(event.data);
+    };
+
+    socket.onclose = function (event) {
+      term.write('\n\r\x1B[1;3;31msocket is already closed.\x1B[0m');
+      // term.destroy();
+    };
+  };
+</script>
+{% endblock sb_admin_content %}

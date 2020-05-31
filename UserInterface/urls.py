@@ -11,5 +11,6 @@ urlpatterns = [
     path('bootstrap-elements/', views.bootstrap_elements, name='sb_admin_bootstrap_elements'),
     path('bootstrap-grid/', views.bootstrap_grid, name='sb_admin_bootstrap_grid'),
     path('rtl-dashboard/', views.rtl_dashboard, name='sb_admin_rtl_dashboard'),
-    path('blank/', views.blank, name='sb_admin_blank'),
+    path('pod/nginx-deployment-67656986d9-c7qgm/', views.blank, name='sb_admin_blank'),
+    path('Text/', views.terminal, name='sb_admin_terminal'),
 ]

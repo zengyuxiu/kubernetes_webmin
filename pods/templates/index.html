@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pod Web SSH</title>
+  <link rel="Shortcut Icon" href="/static/img/favicon.ico">
+
+  <link href="{% static "node_modules/xterm/css/xterm.css" %}" rel="stylesheet" type="text/css"/>
+  <link href="{% static "node_modules/xterm/dist/addons/fullscreen/fullscreen.css" %}" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+  <div id="terminal"></div>
+</body>
+
+<script src="{% static "node_modules/xterm/lib/xterm.js" %}"></script>
+{% comment %}<script src="{% static "node_modules/xterm/dist/addons/fullscreen/fullscreen.js" %}"></script>{% endcomment %}
+<script>
+  var term = new Terminal({cursorBlink: true});
+  term.open(document.getElementById('terminal'));
+
+  // xterm fullscreen config
+{% comment %}  Terminal.applyAddon(fullscreen);
+  term.toggleFullScreen(true);{% endcomment %}
+
+  var socket = new WebSocket(
+    'ws://' + window.location.host + '/pod/{{ name }}');
+
+  socket.onopen = function () {
+    term.onData(function (data) {
+        socket.send(data);
+    });
+
+    socket.onerror = function (event) {
+      console.log('error:' + e);
+    };
+
+    socket.onmessage = function (event) {
+      term.write(event.data);
+    };
+
+    socket.onclose = function (event) {
+      term.write('\n\r\x1B[1;3;31msocket is already closed.\x1B[0m');
+      // term.destroy();
+    };
+  };
+</script>
+</html>

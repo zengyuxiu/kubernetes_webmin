@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .kube_model import Service
+from .kube_model.Console import Console
 
 
 class YAMLConfigModelFrom(ModelForm):
@@ -16,3 +16,11 @@ class YAML_config_file_form(forms.Form):
     def cleanned_config_file(self):
         file = self.cleaned_data['config_file']
         return file
+
+
+class SelectContainerForm(forms.Form):
+    name = forms.CharField()
+
+    def name_ret(self):
+        pod_name = self.cleaned_data['name']
+        return pod_name

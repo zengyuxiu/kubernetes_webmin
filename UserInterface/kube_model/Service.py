@@ -4,7 +4,7 @@ from kubernetes.utils import create_from_yaml
 
 
 class apply_service():
-    config_path = "~/.kube/kind-config-kind"
+    config_path = "~/.kube/config"
     config.load_kube_config(config_path)
 
     def apply_via_yaml(self, file):
