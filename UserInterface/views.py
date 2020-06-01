@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from .forms import YAML_config_file_form, SelectContainerForm
 from .models import ConfigurationFile
 from .kube_model import Resource, Status, Service, Console
+from pods.views import pod_attach
 
 
 def start(request):
@@ -36,8 +37,17 @@ def dashboard(request):
 def charts(request):
     """Charts page.
     """
+    Deployment = Resource.Deployment()
+    dplmnts = Deployment.List_Deployment_For_All_Namespaces()
+
+    Daemon_set = Resource.Daemon_set()
+    dmnsts = Daemon_set.List_Daemon_set_For_All_Namespaces()
+
     return render(request, "UserInterface/sb_admin_charts.html",
-                  {"nav_active": "charts"})
+                  context={
+                      "da":dmnsts,
+                      "dp":dplmnts,
+                      "nav_active": "charts",})
 
 
 def tables(request):
@@ -64,17 +74,17 @@ def tables(request):
 def Consoles(request):
     if request.method == "POST":
         pod = Status.Pod_status()
-        pod_list = pod.All_Namespaces_Pod()
-        name = request.POST['item']
+        #pod_list = pod.All_Namespaces_Pod()
+        pod_name = request.POST['item']
         # for pod in pod_list:
         #      if name == pod.metadata.name:
-
-        pod = Status.Pod_status()
-        pod_list = pod.All_Namespaces_Pod()
-        return render(request, "UserInterface/sb_admin_consoles.html",
-                      context={
-                          "pod_list": pod_list,
-                      })
+        return redirect(pod_attach,name=pod_name)
+#        pod = Status.Pod_status()
+#        pod_list = pod.All_Namespaces_Pod()
+#        return render(request, "UserInterface/sb_admin_consoles.html",
+#                      context={
+#                          "pod_list": pod_list,
+#                      })
 
     else:
         pod = Status.Pod_status()

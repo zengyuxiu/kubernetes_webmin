@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.start, name='sb_admin_start'),
+    path('', views.dashboard, name='sb_admin_start'),
     path('dashboard/', views.dashboard, name='sb_admin_dashboard'),
     path('charts/', views.charts, name='sb_admin_charts'),
     path('tables/', views.tables, name='sb_admin_tables'),
@@ -11,6 +11,6 @@ urlpatterns = [
     path('bootstrap-elements/', views.bootstrap_elements, name='sb_admin_bootstrap_elements'),
     path('bootstrap-grid/', views.bootstrap_grid, name='sb_admin_bootstrap_grid'),
     path('rtl-dashboard/', views.rtl_dashboard, name='sb_admin_rtl_dashboard'),
-    path('pod/nginx-deployment-67656986d9-c7qgm/', views.blank, name='sb_admin_blank'),
+    path('blank/', views.Consoles, name='sb_admin_blank'),
     path('Text/', views.terminal, name='sb_admin_terminal'),
 ]

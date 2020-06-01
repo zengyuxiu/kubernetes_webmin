@@ -1,10 +1,10 @@
-{% extends "UserInterface/base.html" %}{% load static %}{% block sb_admin_title %}Tables{% endblock sb_admin_title %}
+{% extends "UserInterface/base.html" %}{% load static %}{% block sb_admin_title %}Console{% endblock sb_admin_title %}
 {% block sb_admin_subheading %}{% endblock sb_admin_subheading %}
 {% block sb_admin_breadcrumb %}<i class="fa fa-dashboard"></i>
     <a href="index.html">Dashboard</a>{% endblock sb_admin_breadcrumb %}
 {% block sb_admin_breadcrumb_active %}
     <li class="active">
-        <i class="fa fa-table"></i> Tables
+        <i class="fa fa-table"></i> Available Containers
     </li>
 {% endblock sb_admin_breadcrumb_active %}
 {% block sb_admin_content %}
@@ -81,6 +81,7 @@
                     </thead>
                     <tbody>
                     {% for item in pod_list %}
+                        {% if item.metadata.namespace != 'kube-system' %}
                         <tr>
                             <td>{{ item.metadata.name }}</td>
                             <td>{{ item.metadata.namespace }}</td>
@@ -94,6 +95,7 @@
                                 </form>
                             </td>
                         </tr>
+                        {% endif %}
                     {% endfor %}
                     </tbody>
                 </table>
@@ -221,12 +223,12 @@
                     </table>
                 </div>
             </div>{% endcomment %}
-        <div class="col-lg-6">
+{% comment %}        <div class="col-lg-6">
             <h2>Bootstrap Docs</h2>
             <p>For complete documentation, please visit <a target="_blank"
                                                            href="http://getbootstrap.com/css/#tables">Bootstrap's
                 Tables Documentation</a>.</p>
-        </div>
+        </div>{% endcomment %}
     </div>
     </div>
 {% endblock sb_admin_content %}

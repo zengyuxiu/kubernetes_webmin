@@ -9,19 +9,23 @@
     <title>{% block title %}HGCM{% endblock %}</title>
 
     <!-- Bootstrap Core CSS -->
-    {% block sb_admin_bootstrap_css %}<link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet">{% endblock sb_admin_bootstrap_css %}
+    {% block sb_admin_bootstrap_css %}
+        <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">{% endblock sb_admin_bootstrap_css %}
 
     <!-- Custom CSS -->
-    {% block sb_admin_css %}<link href="{% static "css/sb-admin.css"%}" rel="stylesheet">{% endblock sb_admin_css %}
+    {% block sb_admin_css %}
+        <link href="{% static "css/sb-admin.css" %}" rel="stylesheet">{% endblock sb_admin_css %}
 
     <!-- Custom Fonts -->
-    {% block sb_admin_fonts_css %}<link href="{% static "font-awesome/css/font-awesome.min.css"%}" rel="stylesheet" type="text/css">{% endblock sb_admin_fonts_css %}
+    {% block sb_admin_fonts_css %}
+        <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet"
+              type="text/css">{% endblock sb_admin_fonts_css %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
     {% block sb_admin_custom_css %}{% endblock sb_admin_custom_css %}
@@ -30,21 +34,23 @@
 
 <body>
 
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% block sb_admin_header_url %}{% url "sb_admin_start" %}{% endblock sb_admin_header_url %}">{% block sb_admin_header %}Home{% endblock sb_admin_header %}</a>
-            </div>
-            <!-- Top Menu Items -->
-            {% comment %}{% block sb_admin_navbar_right %}<ul class="nav navbar-right top-nav">
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"
+               href="{% block sb_admin_header_url %}{% url "sb_admin_start" %}{% endblock sb_admin_header_url %}">
+                {% block sb_admin_header %}Home{% endblock sb_admin_header %}</a>
+        </div>
+        <!-- Top Menu Items -->
+        {% comment %}{% block sb_admin_navbar_right %}<ul class="nav navbar-right top-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
@@ -147,135 +153,140 @@
                     </ul>
                 </li>
             </ul>{% endblock sb_admin_navbar_right %}{% endcomment %}
-            {% block sb_admin_sidebar %}<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        {% block sb_admin_sidebar %}<!--
+             Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
- {% comment %}                   <li {% if nav_active == "start" %}class="active"{% endif %}>
+                    {% comment %}                   <li {% if nav_active == "start" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_start" %}"><i class="fa fa-fw fa-play"></i> Start</a>
                     </li>{% endcomment %}
                     <li {% if nav_active == "dashboard" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_dashboard" %}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li {% if nav_active == "charts" %}class="active"{% endif %}>
-                        <a href="{% url "sb_admin_charts" %}"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-                    </li>
-                    <li {% if nav_active == "tables" %}class="active"{% endif %}>
-                        <a href="{% url "sb_admin_tables" %}"><i class="fa fa-fw fa-table"></i> Tables</a>
-                    </li>
+
+
                     <li {% if nav_active == "forms" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_forms" %}"><i class="fa fa-fw fa-edit"></i> Forms</a>
                     </li>
-{% comment %}                    <li {% if nav_active == "bootstrap_elements" %}class="active"{% endif %}>
+                    {% comment %}                    <li {% if nav_active == "bootstrap_elements" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_bootstrap_elements" %}"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                     </li>
                     <li {% if nav_active == "bootstrap_grid" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_bootstrap_grid" %}"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
                     </li>{% endcomment %}
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Charts <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:" data-toggle="collapse" data-target="#demo"><i
+                                class="fa fa-fw fa-arrows-v"></i> Statistics <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
-                            <li>
-                                <a href="#">Pod</a>
+
+                            <li {% if nav_active == "tables" %}class="active"{% endif %}>
+                                <a href="{% url "sb_admin_tables" %}"><i class="fa fa-fw fa-table"></i> Tables</a>
                             </li>
-                            <li>
-                                <a href="#">Daemon set</a>
-                            <li>
-                                <a href="#">Deployment</a>
+
+                            <li {% if nav_active == "charts" %}class="active"{% endif %}>
+                                <a href="{% url "sb_admin_charts" %}"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                             </li>
                         </ul>
                     </li>
 
-{% comment %}
+                    {% comment %}
                     <li {% if nav_active == "rtl_dashboard" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_rtl_dashboard" %}"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                     </li>
 {% endcomment %}
-               <li {% if nav_active == "blank" %}class="active"{% endif %}>
+                    <li {% if nav_active == "blank" %}class="active"{% endif %}>
                         <a href="{% url "sb_admin_blank" %}"><i class="fa fa-fw fa-file"></i> Console</a>
                     </li>
 
                 </ul>
             </div>{% endblock sb_admin_sidebar %}
-            <!-- /.navbar-collapse -->
-        </nav>
+        <!-- /.navbar-collapse -->
+    </nav>
 
-        <div id="page-wrapper">
+    <div id="page-wrapper">
 
-            <div class="container-fluid">
+        <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            {% block sb_admin_title %}Start{% endblock sb_admin_title %}
-                            {% block sb_admin_subheading %}<small>Short introduction</small>{% endblock sb_admin_subheading %}
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                {% block sb_admin_breadcrumb %}<i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>{% endblock sb_admin_breadcrumb %}
-                            </li>
-                            {% block sb_admin_breadcrumb_active %}
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        {% block sb_admin_title %}Start{% endblock sb_admin_title %}
+                        {% block sb_admin_subheading %}
+                            <small>Short introduction</small>{% endblock sb_admin_subheading %}
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            {% block sb_admin_breadcrumb %}<i class="fa fa-dashboard"></i>
+                                <a href="{% url 'sb_admin_dashboard' %}">Dashboard</a>{% endblock sb_admin_breadcrumb %}
+                        </li>
+                        {% block sb_admin_breadcrumb_active %}
                             <li class="active">
-                                 <i class="fa fa-play"></i> Start
+                                <i class="fa fa-play"></i> Start
                             </li>
-                            {% endblock sb_admin_breadcrumb_active %}
-                        </ol>
-                    </div>
+                        {% endblock sb_admin_breadcrumb_active %}
+                    </ol>
                 </div>
-                <!-- /.row -->
-{% if messages %}
+            </div>
+            <!-- /.row -->
+            {% if messages %}
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-<ul class="messages">
-    {% for message in messages %}
-    <div class="alert alert-info alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <i class="fa fa-info-circle"></i>  {{ message }}
-    </div>
-    <!--<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>-->
-    {% endfor %}
-</ul>
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <div class="alert alert-info alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <i class="fa fa-info-circle"></i> {{ message }}
+                                </div>
+                                <!--<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>-->
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
-{% endif %}
-                {% block sb_admin_content %}
+            {% endif %}
+            {% block sb_admin_content %}
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="alert alert-info alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="fa fa-info-circle"></i>  <strong>Django SB Admin</strong> This and everything below is inside <code>sb_admin_content</code> block.
+                            <i class="fa fa-info-circle"></i> <strong>Django SB Admin</strong> This and everything below
+                            is inside <code>sb_admin_content</code> block.
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <h2 class="page-header">Django SB Admin</h2>
-                        <p class="lead">Reusable Django application providing SB Admin dashboard theme, but also some other bootstrap related extras (for now it is only a login snippet).</p>
+                        <p class="lead">Reusable Django application providing SB Admin dashboard theme, but also some
+                            other bootstrap related extras (for now it is only a login snippet).</p>
                         <h5>List of resources</h5>
                         <h6>Font Awesome</h6>
-                        <p class="">You can find list of all awesome icons <a href="https://fortawesome.github.io/Font-Awesome/icons/">here</a>.
+                        <p class="">You can find list of all awesome icons <a
+                                href="https://fortawesome.github.io/Font-Awesome/icons/">here</a>.
                     </div>
                 </div>
                 {% include "UserInterface/login.html" %}
-                {% endblock sb_admin_content %}
-
-            </div>
-            <!-- /.container-fluid -->
+            {% endblock sb_admin_content %}
 
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /.container-fluid -->
 
     </div>
-    <!-- /#wrapper -->
+    <!-- /#page-wrapper -->
 
-    <!-- jQuery -->
-    <script src="{% static "js/jquery.js"%}"></script>
+</div>
+<!-- /#wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static "js/bootstrap.min.js"%}"></script>
+<!-- jQuery -->
+<script src="{% static "js/jquery.js" %}"></script>
 
-    {% block sb_admin_custom_js %}{% endblock sb_admin_custom_js %}
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+
+{% block sb_admin_custom_js %}{% endblock sb_admin_custom_js %}
 
 </body>
 

@@ -1,5 +1,7 @@
 from kubernetes import client, config
 from kubernetes.stream import stream
+from .Status import Pod_status
+
 
 class KubeApi:
     def __init__(self, namespace='default'):
@@ -7,7 +9,7 @@ class KubeApi:
 
         self.namespace = namespace
 
-    def pod_exec(self, pod, container=""):
+    def pod_exec(self, label, container=""):
         api_instance = client.CoreV1Api()
         exec_command = [
             "/bin/sh",
@@ -17,7 +19,10 @@ class KubeApi:
             '&& /usr/bin/script -q -c "/bin/bash" /dev/null || exec /bin/bash) '
             '|| exec /bin/sh']
 
-        pod = 'nginx-deployment-67656986d9-5ql6b'
+        # pod = 'nginx-deployment-67656986d9-5ql6b'
+        pods = Pod_status()
+        pod = pods.GetContainerName(label=label)
+
         cont_stream = stream(api_instance.connect_get_namespaced_pod_exec,
                              name=pod,
                              namespace=self.namespace,

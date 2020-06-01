@@ -35,3 +35,9 @@ class Pod_status():
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling ApiextensionsV1beta1Api->read_custom_resource_definition_status: %s\n" % e)
+
+    def GetContainerName(self,label):
+        items = self.All_Namespaces_Pod()
+        for item in items:
+            if item.metadata.labels['app'] == label :
+                return item.metadata.name
